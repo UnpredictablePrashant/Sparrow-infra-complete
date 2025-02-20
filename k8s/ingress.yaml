@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lms-ingress
+  labels:
+    name: lms-ingress
+spec:
+  rules:
+  - host: compiler.cloudcrypto.in
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/compiler"
+        backend:
+          service:
+            name: judge0-server
+            port: 
+              number: 2358
+
+  - host: api.cloudcrypto.in
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/api"
+        backend:
+          service:
+            name: backend-svc
+            port: 
+              number: 3000
+
+  - host: cloudcrypto.in
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: frontend-svc
+            port: 
+              number: 4200
+
+  - host: sparrow.cloudcrypto.in
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/sparrow"
+        backend:
+          service:
+            name: service-lms-landing
+            port: 
+              number: 4300

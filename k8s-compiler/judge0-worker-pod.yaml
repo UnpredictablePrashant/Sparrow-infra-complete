@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workers
+spec:
+  replicas: 1  # Update replicas if needed
+  selector:
+    matchLabels:
+      app: workers
+  template:
+    metadata:
+      labels:
+        app: workers
+    spec:
+      containers:
+      - name: workers
+        image: "judge0/judge0:1.13.0"
+        command: ["./scripts/workers"]
+        volumeMounts:
+        - name: judge0-config
+          mountPath: /judge0.conf
+          readOnly: true
+      volumes:
+      - name: judge0-config
+        configMap:
+          name: judge0-config

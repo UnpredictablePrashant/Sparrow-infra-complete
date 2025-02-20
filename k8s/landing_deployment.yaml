@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-lms-landing
+spec:
+  selector:
+    matchLabels:
+      app: lms-landing
+  template:
+    metadata:
+      labels:
+        app: lms-landing
+    spec:
+      containers:
+      - name: lms-landing
+        image: "surendergupta/sparrow_landing_ui:11"
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"        
+        ports:
+        - containerPort: 80
